@@ -43,7 +43,7 @@ class Zend_Translate_Adapter_Array extends Zend_Translate_Adapter
     {
         $this->_data = array();
         if (!is_array($data)) {
-            if (file_exists($data)) {
+            if (is_string($data) && strpos($data, "\0") === false && file_exists($data)) {
                 ob_start();
                 $data = include($data);
                 ob_end_clean();

@@ -232,7 +232,7 @@ abstract class Zend_Translate_Adapter
         }
 
         $options = $options + $this->_options;
-        if (is_string($options['content']) and is_dir($options['content'])) {
+        if (is_string($options['content']) and strpos($options['content'], "\0") === false and is_dir($options['content'])) {
             $options['content'] = realpath($options['content']);
             $prev               = '';
             $iterator           = new RecursiveIteratorIterator(

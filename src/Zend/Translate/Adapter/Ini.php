@@ -42,7 +42,7 @@ class Zend_Translate_Adapter_Ini extends Zend_Translate_Adapter
     protected function _loadTranslationData($data, $locale, array $options = array())
     {
         $this->_data = array();
-        if (!file_exists($data)) {
+        if (strpos((string) $data, "\0") !== false || !file_exists($data)) {
             throw new Zend_Translate_Exception("Ini file '" . $data . "' not found");
         }
 
