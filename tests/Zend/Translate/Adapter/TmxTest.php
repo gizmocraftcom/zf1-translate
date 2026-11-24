@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +28,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Translate
  */
+#[Group('Zend_Translate')]
 class Zend_Translate_Adapter_TmxTest extends PHPUnit\Framework\TestCase
 {
     protected $_errorOccurred;
@@ -53,9 +54,7 @@ class Zend_Translate_Adapter_TmxTest extends PHPUnit\Framework\TestCase
         }
     }
 
-    /**
-     * @group ZF-12012
-     */
+    #[Group('ZF-12012')]
     public function testErrorOnCreateIncludesFilename()
     {
         try {
@@ -221,9 +220,7 @@ class Zend_Translate_Adapter_TmxTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('Cooking furniture (en)', $adapter->translate('Küchen Möbel'));
     }
 
-    /**
-     * @group ZF-8375
-     */
+    #[Group('ZF-8375')]
     public function testTranslate_ZF8375()
     {
         $adapter = new Zend_Translate_Adapter_Tmx(dirname(__FILE__) . '/_files/translation_en_8375.tmx', 'en', array('disableNotices' => true));

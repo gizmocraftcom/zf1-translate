@@ -20,6 +20,7 @@
  * @version    $Id $
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +28,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Translate
  */
+#[Group('Zend_Translate')]
 class Zend_TranslateTest extends PHPUnit\Framework\TestCase
 {
     protected $_errorOccured;
@@ -656,9 +657,7 @@ class Zend_TranslateTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('plural_1 (en)', $lang->plural('singular', 'plural', 0));
     }
 
-    /**
-     * @group ZF-9489
-     */
+    #[Group('ZF-9489')]
     public function testAddingAdapterToSourceUsingOwnRule()
     {
         $translate = new Zend_Translate(
@@ -687,9 +686,7 @@ class Zend_TranslateTest extends PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('fr', $languages);
     }
 
-    /**
-     * @group ZF-9500
-     */
+    #[Group('ZF-9500')]
     public function testIgnoreMultipleDirectories()
     {
         $translate = new Zend_Translate(
@@ -726,9 +723,7 @@ class Zend_TranslateTest extends PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('en_US', $langs);
     }
 
-    /**
-     * @group ZF-2736
-     */
+    #[Group('ZF-2736')]
     public function testReroutingForTranslations()
     {
         $translate = new Zend_Translate(
@@ -758,9 +753,7 @@ class Zend_TranslateTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('Message 5 (en)', $translate->translate('Message 5', 'ja'));
     }
 
-    /**
-     * @group ZF-2736
-     */
+    #[Group('ZF-2736')]
     public function testCircleReroutingForTranslations()
     {
         $translate = new Zend_Translate(
@@ -793,9 +786,7 @@ class Zend_TranslateTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('Message 10', $translate->translate('Message 10', 'ja'));
     }
 
-    /**
-     * @group ZF-2736
-     */
+    #[Group('ZF-2736')]
     public function testDoubleReroutingForTranslations()
     {
         $translate = new Zend_Translate(

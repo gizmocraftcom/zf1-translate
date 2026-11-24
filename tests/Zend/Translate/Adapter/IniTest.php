@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,11 +28,21 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Translate
  */
+#[Group('Zend_Translate')]
 class Zend_Translate_Adapter_IniTest extends PHPUnit\Framework\TestCase
 {
     protected $_errorOccurred;
+
+    public function testCreateWithNullByteInFilenameThrowsTranslateException()
+    {
+        try {
+            new Zend_Translate_Adapter_Ini("no\0file.ini", 'en');
+            $this->fail('exception expected');
+        } catch (Zend_Translate_Exception $e) {
+            $this->assertStringContainsString('not found', $e->getMessage());
+        }
+    }
 
     public function testCreate()
     {

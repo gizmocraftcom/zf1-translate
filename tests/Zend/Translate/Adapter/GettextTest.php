@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +28,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Translate
  */
+#[Group('Zend_Translate')]
 class Zend_Translate_Adapter_GettextTest extends PHPUnit\Framework\TestCase
 {
     protected $_errorOccurred;
@@ -250,9 +251,7 @@ class Zend_Translate_Adapter_GettextTest extends PHPUnit\Framework\TestCase
         $this->assertStringContainsString('No adapter information available', current($adapter->getAdapterInfo()));
     }
 
-    /**
-     * @group GH-66
-     */
+    #[Group('GH-66')]
     public function testPluralToPlural()
     {
         $adapter = new Zend_Translate_Adapter_Gettext(
@@ -274,9 +273,7 @@ class Zend_Translate_Adapter_GettextTest extends PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @group GH-66
-     */
+    #[Group('GH-66')]
     public function testPluralToSingular()
     {
         $adapter = new Zend_Translate_Adapter_Gettext(

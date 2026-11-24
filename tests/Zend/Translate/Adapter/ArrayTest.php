@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +28,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Translate
  */
+#[Group('Zend_Translate')]
 class Zend_Translate_Adapter_ArrayTest extends PHPUnit\Framework\TestCase
 {
     /**
@@ -70,6 +71,16 @@ class Zend_Translate_Adapter_ArrayTest extends PHPUnit\Framework\TestCase
 
         try {
             $adapter = new Zend_Translate_Adapter_Array(dirname(__FILE__) . '/_files/failed.php', 'en');
+            $this->fail('Exception expected');
+        } catch (Zend_Translate_Exception $e) {
+            $this->assertStringContainsString('Error including array or file', $e->getMessage());
+        }
+    }
+
+    public function testCreateWithNullByteInDataThrowsTranslateException()
+    {
+        try {
+            new Zend_Translate_Adapter_Array("not\0a file", 'en');
             $this->fail('Exception expected');
         } catch (Zend_Translate_Exception $e) {
             $this->assertStringContainsString('Error including array or file', $e->getMessage());
